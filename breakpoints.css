@@ -1,0 +1,68 @@
+@media (max-width: 768px) {
+    body {
+        background-position: center;
+    }
+
+    .logo {
+        width: 90%;
+    }
+
+    .content {
+        margin-top: 50px;
+    }
+
+    .content > h1 {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+
+    .content > h4 {
+        font-size: 1.2rem;
+    }
+    .content > h1 > span{
+        position: relative;
+        bottom: 20px;
+    }
+    .content > h2 {
+        font-size: 5rem;
+        margin-top: 40px;
+    }
+
+    .navlist {
+        position: absolute;
+        width: 30%;
+        height: 30vh;
+        right: 10px;
+        padding: 1rem 4%;
+        border-radius: 10px;
+        background-color: white;
+        box-shadow: -5px 5px 5px #000000ab;
+        z-index: 100;
+        top: 80px;
+        gap: 10px;
+        display: none;
+        flex-direction: column;
+    }
+    .navItem{
+        text-align: start;
+        width: 100%;
+        padding-left: 20px;
+   }
+    .navlist.show {
+        display: flex;
+    }
+    .graphic img {
+        width: 30%;
+    }
+
+    #menu-icon {
+        display: block;
+        margin-right: 20px;
+    }
+    form{
+        width: 350px;
+    }
+    .event{
+        margin-top: 50px;
+    }
+}
