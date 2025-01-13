@@ -86,15 +86,5 @@
         width: 90%;
     }
 
-    .ruleBox {
-        background-color: white;
-        border-radius: 10px;
-        width: 400px;
-        display: flex;
-        justify-content: space-between;
-        align-items:center ;
-        flex-direction: column;
-        gap: 20px;
 
-    }
 }

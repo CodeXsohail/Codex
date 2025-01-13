@@ -30,6 +30,7 @@ fetch("codex_rules.html")
   })
   .catch((error) => console.error("Error loading rules:", error));
 
+
 function toggleContent(id) {
   const content = document.getElementById(id); // Correctly select the element using its id
   if (content.classList.contains("visible")) {
