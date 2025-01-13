@@ -23,13 +23,6 @@ inputs.forEach((input) => {
   });
 });
 
-fetch("codex_rules.html")
-  .then((response) => response.text())
-  .then((data) => {
-    document.getElementById("rules-section").innerHTML = data;
-  })
-  .catch((error) => console.error("Error loading rules:", error));
-
 
 function toggleContent(id) {
   const content = document.getElementById(id); // Correctly select the element using its id
