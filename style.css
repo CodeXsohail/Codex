@@ -11,8 +11,11 @@
 
 body {
     width: 100vw;
-    height: 100vh;
-    background-image: url(back.png);
+    overflow: hidden;
+    overflow-y: scroll;
+    /* height: 100vh; */
+    background-image: url(./images/back.png);
+    /* background-image: url(silicon.jpg); */
     background-position: start;
     background-size: 100%;
     background-repeat: no-repeat;
@@ -25,7 +28,9 @@ body {
     height: 100%;
     padding: 5px;
 }
-
+.main-content{
+    height: 100vh;
+}
 .navbar {
     width: 100%;
     display: flex;
@@ -82,6 +87,10 @@ body {
     z-index: -1;
 }
 
+.siliconLogo{
+    width: 150px;
+    box-sizing: 10px 10px 10px pink;
+}
 .content > h1 {
     font-size: 3rem;
     text-transform: uppercase;
@@ -149,8 +158,8 @@ body {
 footer{
     width: 100%;
     font-size: 15px;
-    position: absolute;
-    bottom: 70px;
+    /* position: absolute;
+    bottom: 20px; */
     text-align: center;
     color: #464545a8;
     opacity: 0.3;
@@ -165,8 +174,9 @@ form{
     height: 400px;
     border-radius: 10px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.877);
-    background-image: url(back.jpg);
+    background-image: url(./images/back.jpg);
     background-position: center;
+    margin-bottom: 90px;
 }
 form  .login{
     text-align: center;
@@ -262,4 +272,119 @@ form  .login{
 .icons{
     width: 100%;
     font-size: 2.4rem;
+}
+
+
+/* ------------------------------------------------------------ */
+
+.prize{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    background-color: rgba(245, 245, 245, 0.384)    ;
+}
+.prize h1{
+    margin-bottom:10px;
+}
+.trophy{
+    width: 350px;
+}
+.prizeList{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+
+.spin {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 5px 5px 5px black;
+}
+
+.spin img {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border-radius: 50%; 
+}
+
+.spin::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; 
+    border: 2px solid transparent; 
+    border-top-color: #1aeef5ce;
+    /* border-right-color: #f72601c7; */
+    animation: moveBorder 2s linear infinite; 
+}
+
+@keyframes moveBorder {
+    0% {
+        transform: rotate(0deg); 
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* ---------------------------------------------------------------- */
+.questionSet{
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    flex-direction: column;
+    padding: 10px;
+}
+.questionSet > h4{
+    font-size: 1.9rem;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.downloadBtn{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    text-decoration: none;
+    box-shadow: 5px 5px 5px black;
+    width: 300px;
+    background-color: white;
+    border-radius: 5px;
+    color: black;
+    height: 40px;
+    transition: .1s linear all;
+    margin-bottom: 20px;
+}
+
+.downloadBtn:hover{
+    background-color: #f72601c7;
+}
+.downloadBtn span{
+    display: inline-block;
+    margin-right: 10px;
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+.downloadBtn i{
+    position: relative;
+    left: 10%;
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 1.3rem;
 }

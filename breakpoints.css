@@ -1,5 +1,6 @@
 @media (max-width: 768px) {
     body {
+        height: 100vh;
         background-position: center;
     }
 
@@ -24,10 +25,12 @@
         bottom: 20px;
     }
     .content > h2 {
-        font-size: 5rem;
+        font-size: 6rem;
         margin-top: 40px;
     }
-
+    footer{
+        font-size: .9rem;
+    }
     .navlist {
         position: absolute;
         width: 30%;
@@ -43,6 +46,11 @@
         display: none;
         flex-direction: column;
     }
+    .navbar{
+        position: relative;
+        bottom: 5px;
+    }
+
     .navItem{
         text-align: start;
         width: 100%;
@@ -52,7 +60,7 @@
         display: flex;
     }
     .graphic img {
-        width: 30%;
+        width: 50%;
     }
 
     #menu-icon {
@@ -64,5 +72,29 @@
     }
     .event{
         margin-top: 50px;
+    }
+    .prizeList{
+        flex-direction: column;
+    }
+    .prize h1{
+        text-align: center;
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+    }
+
+    .downloadBtn{
+        width: 90%;
+    }
+
+    .ruleBox {
+        background-color: white;
+        border-radius: 10px;
+        width: 400px;
+        display: flex;
+        justify-content: space-between;
+        align-items:center ;
+        flex-direction: column;
+        gap: 20px;
+
     }
 }
