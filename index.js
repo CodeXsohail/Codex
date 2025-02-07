@@ -32,16 +32,17 @@ app.engine("ejs", ejsMath);
 // Add session middleware
 app.use(session({
     secret: 'your-secret-key',
-    resave: true,
+    resave: false,
     saveUninitialized: false,
     store: MongoStore.create({ 
         mongoUrl: process.env.RUI,
         ttl: 24 * 60 * 60 // Session TTL (1 day)
     }),
     cookie: {
-        secure: process.env.NODE_ENV === 'production',
+        secure: false, // Set to true only if using HTTPS
         maxAge: 24 * 60 * 60 * 1000, // 1 day
-        httpOnly: true
+        httpOnly: true,
+        sameSite: 'lax'
     }
 }));
 
