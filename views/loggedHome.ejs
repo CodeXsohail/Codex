@@ -1,0 +1,77 @@
+<% layout("/layouts/headFoot.ejs") %>
+
+<div class="content">
+    <h1>Silicon <span>Academy</span></h1>
+    <h2>CODEX</h2>
+</div>
+
+<div class="welcome">
+    <h2 class="Welcome-message">Welcome, <span style="color: #f72601c7;"><%= rcode %></span>!</h2>
+</div>
+
+<div class="competition-status">
+    <div class="status-card">
+        <i class='bx bx-time-five'></i>
+        <h3>Test Schedule</h3>
+        <% if (testStatus.hasEnded) { %>
+            <p>Test has ended</p>
+        <% } else if (testStatus.hasStarted) { %>
+            <p>Test is in progress</p>
+            <p class="time-remaining">Ends at: <%= testStatus.endTime.toLocaleTimeString() %></p>
+        <% } else { %>
+            <p>Test starts at: <%= testStatus.startTime.toLocaleTimeString() %></p>
+            <p class="time-remaining">Date: <%= testStatus.startTime.toLocaleDateString() %></p>
+        <% } %>
+    </div>
+</div>
+
+<div class="button-section">
+    <% if (!hasSubmitted) { %>
+        <% if (testStatus.hasEnded) { %>
+            <button class="btn take-test-btn disabled" disabled>
+                <i class='bx bx-time-five'></i> Test Ended
+            </button>
+        <% } else if (testStatus.hasStarted) { %>
+            <a href="/test" class="btn take-test-btn">
+                <i class='bx bx-code-alt'></i> Take Test Now
+            </a>
+        <% } else { %>
+            <a href="/start-test" class="btn take-test-btn">
+                <i class='bx bx-time-five'></i> Enter Waiting Room
+            </a>
+        <% } %>
+    <% } %>
+    
+    <% if (hasSubmitted || testStatus.hasEnded) { %>
+        <a href="/result/<%= uname %>" class="btn get-result-btn">
+            <i class='bx bx-trophy'></i> View Result
+        </a>
+    <% } %>
+</div>
+
+<div class="instructions-panel">
+    <h3>Before You Start</h3>
+    <ul>
+        <li>Ensure stable internet connection</li>
+        <li>Keep your roll number handy</li>
+        <li>Test duration: 60 minutes</li>
+        <li>Cannot return to previous questions</li>
+        <li>Submit before time expires</li>
+    </ul>
+</div>
+
+<div class="prize">
+    <img class="trophy" src="/static/images/prizes.png" alt="">
+    <h1>Top 5 get exciting Prizes</h1>
+    <div class="prizeList">
+        <div class="spin">
+            <img src="/static/images/firstPrize.png" alt="">
+        </div>
+        <div class="spin">
+            <img src="/static/images/secondPrize.png" alt="">
+        </div>
+        <div class="spin">
+            <img src="/static/images/thirdPrize.png" alt="">
+        </div>
+    </div>
+</div>

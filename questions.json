@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "question": "What is the output of `printf(\"%d\", 10 + 20);`?",
+    "options": ["10", "20", "30", "Error"],
+    "answer": "30"
+  },
+  {
+    "id": 2,
+    "question": "Which data type is used to store a single character in C?",
+    "options": ["int", "char", "float", "double"],
+    "answer": "char"
+  },
+  {
+    "id": 3,
+    "question": "What does the `sizeof` operator return?",
+    "options": ["Size of a variable", "Size of an array", "Size in bytes", "All of the above"],
+    "answer": "All of the above"
+  },
+  {
+    "id": 4,
+    "question": "What is the default return type of a function in C if not specified?",
+    "options": ["int", "float", "void", "double"],
+    "answer": "int"
+  },
+  {
+    "id": 5,
+    "question": "What is the purpose of the `break` statement in C?",
+    "options": ["Exit a loop or switch case", "Pause the program", "Continue to the next iteration", "None of the above"],
+    "answer": "Exit a loop or switch case"
+  },
+  {
+    "id": 6,
+    "question": "Which loop executes at least once, regardless of the condition?",
+    "options": ["for loop", "while loop", "do-while loop", "None of the above"],
+    "answer": "do-while loop"
+  },
+  {
+    "id": 7,
+    "question": "What is a correct syntax to declare a pointer in C?",
+    "options": ["int *ptr;", "int ptr;", "*int ptr;", "ptr *int;"],
+    "answer": "int *ptr;"
+  },
+  {
+    "id": 8,
+    "question": "Which library function is used to find the length of a string in C?",
+    "options": ["strlen()", "strcat()", "strcmp()", "strcpy()"],
+    "answer": "strlen()"
+  },
+  {
+    "id": 9,
+    "question": "Which of the following is a valid C identifier?",
+    "options": ["1variable", "_variable", "variable@123", "int"],
+    "answer": "_variable"
+  },
+  {
+    "id": 10,
+    "question": "What is the output of `5 % 2` in C?",
+    "options": ["0", "1", "2", "Error"],
+    "answer": "1"
+  },
+  {
+    "id": 11,
+    "question": "Which of the following is an example of application software?",
+    "options": ["Windows", "Microsoft Word", "Linux", "Unix"],
+    "answer": "Microsoft Word"
+  },
+  {
+    "id": 12,
+    "question": "What does URL stand for?",
+    "options": ["Uniform Resource Locator", "Uniform Resource Link", "Universal Resource Locator", "Universal Resource Link"],
+    "answer": "Uniform Resource Locator"
+  },
+  {
+    "id": 13,
+    "question": "Which of the following is NOT an input device?",
+    "options": ["Keyboard", "Mouse", "Printer", "Scanner"],
+    "answer": "Printer"
+  },
+  {
+    "id": 14,
+    "question": "What does RAM stand for?",
+    "options": ["Random Access Memory", "Read Access Memory", "Random Allocation Memory", "Read Allocation Memory"],
+    "answer": "Random Access Memory"
+  },
+  {
+    "id": 15,
+    "question": "Which protocol is used to browse websites?",
+    "options": ["HTTP", "FTP", "SMTP", "TCP"],
+    "answer": "HTTP"
+  },
+  {
+    "id": 16,
+    "question": "What is the binary equivalent of decimal number 10?",
+    "options": ["1000", "1010", "1100", "1110"],
+    "answer": "1010"
+  },
+  {
+    "id": 17,
+    "question": "Which type of network connects computers over short distances, such as in a building?",
+    "options": ["WAN", "LAN", "MAN", "VPN"],
+    "answer": "LAN"
+  },
+  {
+    "id": 18,
+    "question": "Which device is used to connect a computer to a network?",
+    "options": ["Printer", "Monitor", "NIC (Network Interface Card)", "Keyboard"],
+    "answer": "NIC (Network Interface Card)"
+  },
+  {
+    "id": 19,
+    "question": "What is the full form of IP in IP address?",
+    "options": ["Internet Provider", "Internet Protocol", "Intranet Provider", "Intranet Protocol"],
+    "answer": "Internet Protocol"
+  },
+  {
+    "id": 20,
+    "question": "Which of the following is an open-source operating system?",
+    "options": ["Windows", "Linux", "macOS", "DOS"],
+    "answer": "Linux"
+  }
+]

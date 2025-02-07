@@ -1,0 +1,100 @@
+<% layout("/layouts/headFoot.ejs") %>
+
+<div class="content">
+    <h1>Silicon <span>Academy</span></h1>
+    
+    <div class="event-header">
+        <h2>CODEX Competition</h2>
+        <p class="event-tagline">Where Coding Meets Excellence</p>
+    </div>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-date">Phase 1</div>
+            <div class="timeline-content">
+                <h3>Registration</h3>
+                <p>Register yourself for the competition</p>
+                <span class="timeline-status active">Active Now</span>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-date">Phase 2</div>
+            <div class="timeline-content">
+                <h3>Preliminary Round</h3>
+                <p>Multiple choice questions on programming concepts</p>
+                <span class="timeline-status upcoming">Starting Soon</span>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-date">Phase 3</div>
+            <div class="timeline-content">
+                <h3>Final Round</h3>
+                <p>Live coding challenges for qualified participants</p>
+                <span class="timeline-status">Coming Up</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="rules-container">
+        <h2 class="rules-title">Rules & Regulations</h2>
+        
+        <div class="rules-grid">
+            <div class="rule-card">
+                <div class="rule-card-header" onclick="toggleContent('section1')">
+                    <i class='bx bx-book-open'></i>
+                    <h3>General Rules</h3>
+                    <i class='bx bx-chevron-down toggle-icon'></i>
+                </div>
+                <div id="section1" class="rule-card-content">
+                    <ul>
+                        <li><i class='bx bx-check'></i> The test will be conducted in three levels</li>
+                        <li><i class='bx bx-check'></i> Test Fee: Rs. 100 must be submitted before the test begins</li>
+                        <li><i class='bx bx-check'></i> Candidates who participate will receive a medal</li>
+                        <li><i class='bx bx-check'></i> Top 40% of candidates from Level 1 will proceed to Level 2</li>
+                        <li><i class='bx bx-check'></i> Participants in Level 2 will receive a certificate</li>
+                        <li><i class='bx bx-check'></i> Top 5 candidates in Level 3 will be awarded prizes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="rule-card">
+                <div class="rule-card-header" onclick="toggleContent('section2')">
+                    <i class='bx bx-code-block'></i>
+                    <h3>Technical Guidelines</h3>
+                    <i class='bx bx-chevron-down toggle-icon'></i>
+                </div>
+                <div id="section2" class="rule-card-content">
+                    <h4>Level 1:</h4>
+                    <ul>
+                        <li><i class='bx bx-time'></i> 60 minutes duration</li>
+                        <li><i class='bx bx-list-check'></i> Multiple choice questions</li>
+                        <li><i class='bx bx-x-circle'></i> No negative marking</li>
+                        <li><i class='bx bx-code-alt'></i> Topics: Programming fundamentals, Logic, Algorithms</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="rule-card">
+                <div class="rule-card-header" onclick="toggleContent('section3')">
+                    <i class='bx bx-check-shield'></i>
+                    <h3>Code of Conduct</h3>
+                    <i class='bx bx-chevron-down toggle-icon'></i>
+                </div>
+                <div id="section3" class="rule-card-content">
+                    <ul>
+                        <li><i class='bx bx-block'></i> No external help or resources allowed during the test</li>
+                        <li><i class='bx bx-window'></i> Browser tabs will be monitored</li>
+                        <li><i class='bx bx-badge-check'></i> Maintain academic integrity</li>
+                        <li><i class='bx bx-error'></i> Violations will lead to disqualification</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-cta">
+        <a href="/login" class="cta-button">Join Competition</a>
+    </div>
+</div>

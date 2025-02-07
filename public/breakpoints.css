@@ -1,0 +1,201 @@
+@media (max-width: 768px) {
+    body {
+        height: 100vh;
+        background-position: center;
+    }
+
+    .container {
+        width: 100%;
+        overflow-x: hidden; /* Prevent horizontal scroll */
+    }
+
+    .navbar {
+        width: 100%;
+        padding: 10px 15px;
+        position: relative; /* Add this */
+    }
+
+    .logo {
+        width: 120px;
+        z-index: 2; /* Keep logo above menu */
+    }
+
+    .menu-toggle {
+        display: block;
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1001; /* Keep menu icon above everything */
+        background: none;
+        border: none;
+        font-size: 2rem;
+        padding: 5px;
+    }
+
+    .navlist {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%; /* Full width on very small devices */
+        max-width: 300px; /* Maximum width on larger devices */
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        padding: 80px 20px;
+        transition: 0.3s ease;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
+
+    .navlist.show {
+        right: 0;
+    }
+
+    .navItem {
+        width: 100%;
+        padding: 15px;
+        font-size: 1.1rem;
+        border-bottom: 1px solid #eee;
+    }
+
+    .navItem:last-child {
+        border-bottom: none;
+    }
+
+    /* Prevent body scroll when menu is open */
+    body.menu-open {
+        overflow: hidden;
+    }
+
+    .content > h1 {
+        font-size: 2rem;
+        text-align: center;
+        letter-spacing: 5px;
+    }
+
+    .content > h2 {
+        font-size: 4rem;
+        margin-top: 20px;
+    }
+
+    /* Adjust other mobile styles as needed */
+    .content > h4 {
+        font-size: 1rem;
+    }
+
+    .content {
+        margin-top: 50px;
+    }
+
+    .content > h1 > span{
+        position: relative;
+        bottom: 20px;
+    }
+
+    footer{
+        padding: 12px 0;
+        font-size: 0.8rem;
+    }
+
+    .graphic img {
+        width: 50%;
+    }
+
+    #menu-icon {
+        display: block;
+        margin-right: 20px;
+    }
+    form{
+        width: 350px;
+    }
+    .event{
+        margin-top: 50px;
+    }
+    .prizeList{
+        flex-direction: column;
+    }
+    .prize h1{
+        text-align: center;
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+    }
+
+    .downloadBtn{
+        width: 90%;
+    }
+
+    .result-box{
+        width: 100%;
+    }
+
+    .page-wrapper {
+        min-height: 100vh;
+    }
+
+    .auth-container {
+        padding: 15px;
+    }
+
+    .auth-card {
+        margin: 0;
+        padding: 20px;
+    }
+
+    .auth-form input {
+        padding: 10px 10px 10px 35px;
+        font-size: 0.9em;
+    }
+
+    .auth-button {
+        padding: 10px;
+        font-size: 1em;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 8px 12px;
+    }
+
+    .logo {
+        width: 100px;
+    }
+
+    .menu-toggle {
+        right: 12px;
+        font-size: 1.8rem;
+    }
+
+    .navlist {
+        width: 100%;
+        padding: 60px 15px;
+    }
+
+    .content > h1 {
+        font-size: 1.5rem;
+        letter-spacing: 3px;
+    }
+
+    .content > h2 {
+        font-size: 3rem;
+    }
+
+    footer {
+        padding: 10px 0;
+        font-size: 0.75rem;
+    }
+
+    .auth-card {
+        padding: 15px;
+    }
+
+    .auth-header h1 {
+        font-size: 1.8em;
+    }
+
+    .auth-header h2 {
+        font-size: 1.3em;
+    }
+}

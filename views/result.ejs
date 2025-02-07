@@ -1,0 +1,103 @@
+<% layout("/layouts/headFoot.ejs") %>
+
+<div class="content result-page">
+  <h1>Silicon <span>Academy</span></h1>
+</div>
+
+<div class="result-container">
+  <div class="result-header">
+    <h2>Test Results</h2>
+    <h3 class="Welcome-message">
+      Participant: <span><%= uname %></span> | Roll: <span><%= roll %></span>
+    </h3>
+  </div>
+
+  <div class="result-card">
+    <div class="score-circle">
+      <svg viewBox="0 0 36 36" class="circular-chart">
+        <path class="circle-bg" d="M18 2.0845
+          a 15.9155 15.9155 0 0 1 0 31.831
+          a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+        <path class="circle" stroke-dasharray="<%= percentage %>, 100" d="M18 2.0845
+          a 15.9155 15.9155 0 0 1 0 31.831
+          a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+        <text x="18" y="20.35" class="percentage"><%= percentage %>%</text>
+      </svg>
+    </div>
+
+    <div class="score-details">
+      <div class="score-item">
+        <i class='bx bx-target-lock'></i>
+        <div>
+          <h4>Score</h4>
+          <p><%= score %> / <%= maxScore %></p>
+        </div>
+      </div>
+      
+      <div class="score-item">
+        <i class='bx bx-trophy'></i>
+        <div>
+          <h4>Rank</h4>
+          <p>Coming Soon</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-actions">
+    <button onclick="shareResults()" class="share-btn">
+      <i class='bx bx-share-alt'></i> Share Results
+    </button>
+    <button onclick="downloadCertificate()" class="download-btn">
+      <i class='bx bx-download'></i> Download Certificate
+    </button>
+  </div>
+
+  <div class="performance-summary">
+    <h3>Performance Summary</h3>
+    <div class="summary-grid">
+      <div class="summary-card">
+        <i class='bx bx-time'></i>
+        <h4>Time Taken</h4>
+        <p>Coming Soon</p>
+      </div>
+      <div class="summary-card">
+        <i class='bx bx-bulb'></i>
+        <h4>Accuracy</h4>
+        <p><%= percentage %>%</p>
+      </div>
+      <div class="summary-card">
+        <i class='bx bx-line-chart'></i>
+        <h4>Percentile</h4>
+        <p>Coming Soon</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function shareResults() {
+  const text = `I scored ${<%= score %>}/${<%= maxScore %>} (${<%= percentage %>}%) in the Silicon Academy CODEX test!`;
+  if (navigator.share) {
+    navigator.share({
+      title: 'My CODEX Test Results',
+      text: text,
+      url: window.location.href
+    })
+    .catch(console.error);
+  } else {
+    // Fallback
+    const dummy = document.createElement('textarea');
+    document.body.appendChild(dummy);
+    dummy.value = text;
+    dummy.select();
+    document.execCommand('copy');
+    document.body.removeChild(dummy);
+    alert('Results copied to clipboard!');
+  }
+}
+
+function downloadCertificate() {
+  alert('Certificate generation coming soon!');
+}
+</script>

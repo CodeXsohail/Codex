@@ -1,0 +1,46 @@
+<% layout("/layouts/headFoot.ejs") %>
+
+<div class="content">
+    <h1>Silicon <span>Academy</span></h1>
+    <div class="waiting-room">
+        <h2>Test Waiting Room</h2>
+        <div class="countdown-timer">
+            <h3>Test Starts In:</h3>
+            <div id="countdown"></div>
+        </div>
+        <div class="test-info">
+            <p>Start Time: <%= startTime.toLocaleString() %></p>
+            <p>Duration: 60 minutes</p>
+        </div>
+        <div class="instructions">
+            <h3>Please Note:</h3>
+            <ul>
+                <li>The test will automatically begin at the scheduled time</li>
+                <li>Ensure stable internet connection</li>
+                <li>Keep your roll number handy</li>
+                <li>Do not refresh the page once test begins</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+const startTime = new Date('<%= startTime.toISOString() %>').getTime();
+
+const countdown = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = startTime - now;
+    
+    const hours = Math.floor(distance / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+    document.getElementById('countdown').innerHTML = 
+        `${hours}h ${minutes}m ${seconds}s`;
+    
+    if (distance < 0) {
+        clearInterval(countdown);
+        window.location.reload();
+    }
+}, 1000);
+</script> 

@@ -1,0 +1,205 @@
+<% layout("/layouts/headFoot.ejs") %>
+
+<div class="content test-page">
+  <h1>Silicon <span>Academy</span></h1>
+</div>
+
+<div class="test-container">
+  <div class="test-content">
+    <div class="test-header">
+      <div class="student-info">
+        <p class="student-name">Student Name: <span><%= fullName %></span></p>
+        <p class="roll-number">Roll Number: <span><%= roll %></span></p>
+      </div>
+      <div class="timer" id="timer">Time Remaining: 60:00</div>
+    </div>
+
+    <div class="progress-section">
+      <div class="progress-bar">
+        <div class="progress-bar-fill" id="progressBar"></div>
+      </div>
+      <p class="progress-text"><span id="currentQuestionNum">1</span> of <%= questions.length %> questions</p>
+    </div>
+
+    <form id="testForm" class="question-form">
+      <input type="hidden" name="uname" value="<%= uname %>">
+      <input type="hidden" name="roll" value="<%= roll %>">
+      
+      <div id="questionContainer" class="question-card">
+        <% questions.forEach((question, index) => { %>
+          <div class="question-slide" id="question<%= index + 1 %>" style="display: <%= index === 0 ? 'block' : 'none' %>;">
+            <div class="question-header">
+              <h3 class="question-number">Question <%= index + 1 %></h3>
+            </div>
+            <p class="question-text"><%= question.question %></p>
+            <div class="options-container">
+              <% question.options.forEach((option, optIndex) => { %>
+                <label class="option-label">
+                  <input type="radio" name="q<%= question.id %>" value="<%= option %>" 
+                         onchange="updateProgress()">
+                  <span class="option-text"><%= option %></span>
+                </label>
+              <% }); %>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="nav-btn" id="prevBtn" onclick="navigate(-1)">
+          <i class='bx bx-chevron-left'></i> Previous
+        </button>
+        <button type="button" class="nav-btn" id="skipBtn" onclick="skipQuestion()">
+          Skip <i class='bx bx-skip-next'></i>
+        </button>
+        <button type="button" class="nav-btn" id="nextBtn" onclick="navigate(1)">
+          Next <i class='bx bx-chevron-right'></i>
+        </button>
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <i class='bx bx-check-circle'></i> Submit Test
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+let currentQuestion = 1;
+const totalQuestions = <%= questions.length %>;
+
+function updateProgress() {
+    const answered = document.querySelectorAll('input[type="radio"]:checked').length;
+    const progress = (answered / totalQuestions) * 100;
+    document.querySelector('.progress-bar-fill').style.width = `${progress}%`;
+    document.querySelector('.progress-text').textContent = 
+        `${answered} of ${totalQuestions} questions answered`;
+}
+
+function navigate(direction) {
+    const nextQuestion = currentQuestion + direction;
+    if (nextQuestion >= 1 && nextQuestion <= totalQuestions) {
+        showQuestion(nextQuestion);
+    }
+}
+
+function skipQuestion() {
+    if (currentQuestion < totalQuestions) {
+        showQuestion(currentQuestion + 1);
+    }
+}
+
+function showQuestion(questionNum) {
+    // Hide current question
+    document.getElementById(`question${currentQuestion}`).style.display = 'none';
+    
+    // Show new question
+    document.getElementById(`question${questionNum}`).style.display = 'block';
+    currentQuestion = questionNum;
+    
+    // Update UI elements
+    document.getElementById('currentQuestionNum').textContent = questionNum;
+    
+    // Handle button states
+    const nextBtn = document.getElementById('nextBtn');
+    const skipBtn = document.getElementById('skipBtn');
+    
+    // Handle last question
+    if (questionNum === totalQuestions) {
+        nextBtn.style.display = 'none';
+        skipBtn.style.display = 'none';
+    } else {
+        nextBtn.style.display = 'block';
+        skipBtn.style.display = 'block';
+    }
+
+    // Update progress
+    updateProgress();
+}
+
+// Add event listeners to all radio buttons to track progress
+document.querySelectorAll('input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', updateProgress);
+});
+
+// Form submission handler
+document.getElementById('testForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    
+    const formData = new FormData(event.target);
+    const answers = [];
+    const totalQuestions = <%= questions.length %>;
+    
+    // Process each form entry
+    formData.forEach((value, key) => {
+        if (key.startsWith('q')) { // Changed from 'answers' to 'q' to match your HTML
+            answers.push({
+                questionId: parseInt(key.substring(1)), // Remove 'q' prefix
+                selectedAnswer: value,
+            });
+        }
+    });
+
+    const uname = formData.get('uname');
+    const rcode = '<%= fullName %>'; // Using fullName instead of rcode
+
+    // Check for unanswered questions
+    if (answers.length < totalQuestions) {
+        const proceed = confirm(`Warning: You have only answered ${answers.length} out of ${totalQuestions} questions.\n\nDo you want to:\n- Click OK to submit anyway\n- Click Cancel to go back and answer more questions`);
+        if (!proceed) {
+            return;
+        }
+    } else if (!confirm('You have answered all questions. Are you sure you want to submit?')) {
+        return;
+    }
+
+    try {
+        const response = await fetch('/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                uname, 
+                rcode, 
+                answers 
+            })
+        });
+
+        const result = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(result.error || 'Submission failed');
+        }
+
+        if (result.success) {
+            window.location.href = result.redirectUrl;
+        } else {
+            throw new Error(result.error || 'Submission failed');
+        }
+
+    } catch (error) {
+        console.error('Submission error:', error);
+        alert(`Error submitting test: ${error.message}`);
+    }
+});
+
+// Initialize first question and progress
+showQuestion(1);
+updateProgress();
+
+// Initialize timer
+let timeLeft = 60 * 60; // 60 minutes
+const timerElement = document.getElementById('timer');
+
+const timer = setInterval(() => {
+    timeLeft--;
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    
+    timerElement.textContent = `Time Remaining: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+    if (timeLeft <= 0) {
+        clearInterval(timer);
+        alert('Time is up! Your test will be submitted automatically.');
+        document.getElementById('testForm').submit();
+    }
+}, 1000);
+</script>

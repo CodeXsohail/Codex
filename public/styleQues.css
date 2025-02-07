@@ -1,0 +1,380 @@
+/* Base styles */
+.test-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f8f9fa;
+}
+
+.test-content {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Header styles */
+.test-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    border-bottom: 1px solid #eee;
+}
+
+.student-info {
+    text-align: center;
+    flex: 1;
+}
+
+.student-name, .roll-number {
+    margin: 5px 0;
+    color: #333;
+    font-weight: 500;
+}
+
+.student-info span {
+    color: #f72601c7;
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+.timer {
+    padding: 12px 25px;
+    font-weight: bold;
+    color: #f72601c7;
+    border: 2px solid #f72601c7;
+    border-radius: 8px;
+    background: white;
+}
+
+/* Progress section */
+.progress-section {
+    padding: 15px 30px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #eee;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #dee2e6;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: #f72601c7;
+    width: 0;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    text-align: center;
+    color: #666;
+    font-size: 0.9em;
+    margin: 8px 0 0;
+}
+
+/* Desktop Layout */
+@media (min-width: 769px) {
+    .question-form {
+        padding: 30px;
+    }
+
+    #questionContainer {
+        background: #f8f9fa;
+        padding: 25px 30px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+    }
+
+    .question-text {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        color: #333;
+        line-height: 1.5;
+    }
+
+    .options-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+    }
+
+    .option-label {
+        padding: 12px 20px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        background: white;
+        border: 2px solid #dee2e6;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        width: 100%;
+    }
+
+    .form-actions {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 12px;
+        margin-top: 20px;
+    }
+
+    .nav-btn {
+        min-width: 140px;
+        padding: 12px 25px;
+    }
+}
+
+/* Mobile Layout */
+@media (max-width: 768px) {
+    .test-container {
+        padding: 0;
+        background: white;
+    }
+
+    .test-content {
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .test-header {
+        padding: 15px;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .student-info {
+        width: 100%;
+        text-align: center;
+    }
+
+    .timer {
+        width: 100%;
+        text-align: center;
+    }
+
+    .progress-section {
+        padding: 10px 15px;
+    }
+
+    .question-form {
+        padding: 10px;
+    }
+
+    #questionContainer {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 0 0 15px 0;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .question-text {
+        font-size: 1rem;
+        margin-bottom: 20px;
+        line-height: 1.4;
+        color: #333;
+        padding: 0 5px;
+    }
+
+    .options-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 0 5px;
+    }
+
+    .option-label {
+        padding: 12px 15px;
+        background: white;
+        border: 2px solid #dee2e6;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        min-height: 45px;
+    }
+
+    .option-label:active {
+        background: #f8f9fa;
+        border-color: #f72601c7;
+    }
+
+    .option-label:hover {
+        transform: none; /* Remove hover effect on mobile */
+    }
+
+    .option-label input[type="radio"] {
+        margin-right: 12px;
+        width: 20px;
+        height: 20px;
+    }
+
+    .option-text {
+        font-size: 0.95rem;
+        line-height: 1.3;
+    }
+
+    .form-actions {
+        position: sticky;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        padding: 10px;
+        background: white;
+        border-top: 1px solid #eee;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        z-index: 100;
+    }
+
+    .nav-btn {
+        padding: 10px 8px;
+        font-size: 0.9rem;
+        height: 40px;
+        min-width: 0;
+    }
+
+    .submit-btn {
+        grid-column: 1 / -1;
+        height: 40px;
+    }
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+    .test-header {
+        padding: 12px;
+    }
+
+    .student-info {
+        font-size: 0.9rem;
+    }
+
+    .timer {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+
+    .question-text {
+        font-size: 0.95rem;
+    }
+
+    .option-label {
+        padding: 10px 12px;
+        min-height: 42px;
+    }
+
+    .option-text {
+        font-size: 0.9rem;
+    }
+
+    .nav-btn {
+        padding: 8px;
+        font-size: 0.85rem;
+        height: 36px;
+    }
+
+    .submit-btn {
+        height: 36px;
+    }
+
+    .form-actions {
+        padding: 8px;
+        gap: 6px;
+    }
+}
+
+/* Common styles */
+.option-label:hover {
+    border-color: #f72601c7;
+    transform: translateX(5px);
+}
+
+.option-label input[type="radio"] {
+    margin-right: 15px;
+    width: 18px;
+    height: 18px;
+}
+
+.option-text {
+    font-size: 1rem;
+    color: #444;
+}
+
+.nav-btn {
+    border: 2px solid #f72601c7;
+    background: white;
+    color: #f72601c7;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+    background: #f72601c7;
+    color: white;
+}
+
+.submit-btn {
+    background: #f72601c7;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 12px 25px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+}
+
+.submit-btn:hover {
+    background: #d12601;
+}
+
+.submit-btn i {
+    font-size: 1.2em;
+}
+
+@media (max-width: 768px) {
+    .submit-btn {
+        max-width: none;
+        height: 40px;
+        padding: 8px 15px;
+    }
+}
+
+/* Selected option state */
+.option-label input[type="radio"]:checked + .option-text {
+    color: #f72601c7;
+    font-weight: 500;
+}
+
+.option-label input[type="radio"]:checked {
+    accent-color: #f72601c7;
+}
+
+.nav-btn.disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+}
+

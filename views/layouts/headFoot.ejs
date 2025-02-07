@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codex | Silicon Academy</title>
+    <link rel="shortcut icon" href="/static/favicon-32x32.png" type="image/x-icon">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/breakpoints.css">
+    <link rel="stylesheet" href="/static/styleQues.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <div class="content-wrapper">
+            <div class="navbar">
+                <div class="logo">
+                    <img src="/static/images/codexLogo.png" alt="Codex Logo">
+                </div>
+
+                <button class="menu-toggle" id="menu-icon">
+                    <i class='bx bx-menu'></i>
+                </button>
+
+            
+                <nav class="navlist" id="navlist">
+                    <a href="/" class="navItem">
+                        <i class='bx bx-home-alt'></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="/events" class="navItem">
+                        <i class='bx bx-calendar-event'></i>
+                        <span>Events</span>
+                    </a>
+                    <% if (typeof session !== 'undefined' && session.user) { %>
+                        <a href="/dashboard" class="navItem">
+                            <i class='bx bx-dashboard'></i>
+                            <span>Dashboard</span>
+                        </a>
+                        <a href="/logout" class="navItem logout">
+                            <i class='bx bx-log-out'></i>
+                            <span>Logout</span>
+                        </a>
+                    <% } else { %>
+                        <a href="/login" class="navItem">
+                            <i class='bx bx-log-in'></i>
+                            <span>Login</span>
+                        </a>
+                    <% } %>
+                </nav>
+
+            </div>
+            <%- body %>
+        </div>
+        <footer>
+             All rights reserved to &copy; Codex Silicon Academy 2025.
+        </footer>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

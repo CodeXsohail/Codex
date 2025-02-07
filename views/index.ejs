@@ -1,0 +1,55 @@
+<% layout("/layouts/headFoot.ejs") %>
+
+<div class="content">
+    <h1>Silicon <span>Academy</span></h1>
+    <h4>presents</h4>
+    <h2>CODEX</h2>
+    
+    <div class="hero-section">
+        <div class="hero-text">
+            <h3>Test Your Coding Skills</h3>
+            <p>Join the competition and showcase your programming expertise</p>
+            <% if (typeof session !== 'undefined' && session.user) { %>
+                <a href="/dashboard" class="cta-button">Go to Dashboard</a>
+            <% } else { %>
+                <a href="/login" class="cta-button">Start Now</a>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<div class="features-section">
+    <div class="feature-card">
+        <i class='bx bx-code-alt'></i>
+        <h3>Coding Challenges</h3>
+        <p>Solve real-world programming problems</p>
+    </div>
+    
+    <div class="feature-card">
+        <i class='bx bx-timer'></i>
+        <h3>Timed Tests</h3>
+        <p>Test your skills under pressure</p>
+    </div>
+    
+    <div class="feature-card">
+        <i class='bx bx-trophy'></i>
+        <h3>Win Prizes</h3>
+        <p>Top performers get exciting rewards</p>
+    </div>
+</div>
+
+<div class="prize">
+    <img class="trophy" src="/static/images/prizes.png" alt="Trophy">
+    <h1>Top 5 get exciting Prizes</h1>
+    <div class="prizeList">
+        <div class="spin">
+            <img src="/static/images/firstPrize.png" alt="First Prize">
+        </div>
+        <div class="spin">
+            <img src="/static/images/secondPrize.png" alt="Second Prize">
+        </div>
+        <div class="spin">
+            <img src="/static/images/thirdPrize.png" alt="Third Prize">
+        </div>
+    </div>
+</div>

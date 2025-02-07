@@ -1,0 +1,38 @@
+<% layout("/layouts/headFoot.ejs") %>
+
+<div class="content">
+    <h1>Silicon <span>Academy</span></h1>
+    <form action="/register/silicon2024" method="POST" class="register-form">
+        <h2>Register New Student</h2>
+        
+        <div class="input-field">
+            <input type="text" id="fname" name="fname" required>
+            <label for="fname"><i class='bx bxs-user'></i> First Name</label>
+        </div>
+        
+        <div class="input-field">
+            <input type="text" id="lname" name="lname" required>
+            <label for="lname"><i class='bx bxs-user'></i> Last Name</label>
+        </div>
+        
+        <div class="input-field">
+            <input type="text" id="uname" name="uname" required>
+            <label for="uname"><i class='bx bxs-user-pin'></i> Username</label>
+        </div>
+        
+        <div class="input-field">
+            <input type="text" id="roll" name="roll" required>
+            <label for="roll"><i class='bx bxs-id-card'></i> Roll Number</label>
+        </div>
+        
+        <div class="btns">
+            <button type="submit" class="submit">Register</button>
+        </div>
+        
+        <% if (message) { %>
+            <p class="message <%= message.includes('successful') ? 'success' : 'error' %>">
+                <%= message %>
+            </p>
+        <% } %>
+    </form>
+</div> 
