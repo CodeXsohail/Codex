@@ -17,10 +17,25 @@
             <p>Test has ended</p>
         <% } else if (testStatus.hasStarted) { %>
             <p>Test is in progress</p>
-            <p class="time-remaining">Ends at: <%= testStatus.endTime.toLocaleTimeString() %></p>
+            <p class="time-remaining">Ends at: <%= testStatus.endTime.toLocaleString('en-US', {
+                timeZone: testStatus.timeZone,
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true
+            }) %></p>
         <% } else { %>
-            <p>Test starts at: <%= testStatus.startTime.toLocaleTimeString() %></p>
-            <p class="time-remaining">Date: <%= testStatus.startTime.toLocaleDateString() %></p>
+            <p>Test starts at: <%= testStatus.startTime.toLocaleString('en-US', {
+                timeZone: testStatus.timeZone,
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true
+            }) %></p>
+            <p class="time-remaining">Date: <%= testStatus.startTime.toLocaleString('en-US', {
+                timeZone: testStatus.timeZone,
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric'
+            }) %></p>
         <% } %>
     </div>
 </div>

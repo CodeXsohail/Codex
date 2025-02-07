@@ -366,7 +366,8 @@ app.get('/dashboard', requireAuth, async (req, res) => {
                 hasStarted: now >= testStart,
                 hasEnded: now >= testEnd,
                 startTime: testStart,
-                endTime: testEnd
+                endTime: testEnd,
+                timeZone: 'Asia/Kolkata' // Add timezone info
             }
         });
     } catch (error) {
