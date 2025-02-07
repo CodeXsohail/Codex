@@ -9,7 +9,15 @@
             <div id="countdown"></div>
         </div>
         <div class="test-info">
-            <p>Start Time: <%= startTime.toLocaleString() %></p>
+            <p>Start Time: <%= startTime.toLocaleString('en-US', { 
+                timeZone: 'Asia/Kolkata',
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true
+            }) %></p>
             <p>Duration: 60 minutes</p>
         </div>
         <div class="instructions">
@@ -26,6 +34,8 @@
 
 <script>
 const startTime = new Date('<%= startTime.toISOString() %>').getTime();
+const userTimezoneOffset = new Date().getTimezoneOffset() * 60000;
+const istOffset = 5.5 * 60 * 60 * 1000; // IST offset in milliseconds
 
 const countdown = setInterval(() => {
     const now = new Date().getTime();
