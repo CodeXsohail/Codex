@@ -5,6 +5,7 @@ const ejsMath = require("ejs-mate");
 const User = require("./models/users.js");
 const Question = require("./models/questions.js");
 const StudentResponse = require("./models/StudentResponse.js");
+const ActiveSession = require("./models/activeSession.js");
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const app = express();
@@ -59,13 +60,58 @@ app.use((req, res, next) => {
      next();
 });
 
-// Middleware to check authentication
-const requireAuth = (req, res, next) => {
+// Middleware to check authentication and session validity
+const requireAuth = async (req, res, next) => {
     if (!req.session.user) {
         return res.redirect('/login');
     }
-    next();
+
+    try {
+        // Check if this is still the active session for this user
+        const activeSession = await ActiveSession.findOne({ 
+            userId: req.session.user.id 
+        });
+
+        if (!activeSession || activeSession.sessionId !== req.sessionID) {
+            // This session is no longer active
+            req.session.destroy();
+            return res.redirect('/login?error=session_expired');
+        }
+
+        // Update last active timestamp
+        await ActiveSession.updateOne(
+            { userId: req.session.user.id },
+            { lastActive: new Date() }
+        );
+
+        next();
+    } catch (error) {
+        console.error('Session verification error:', error);
+        req.session.destroy();
+        return res.redirect('/login');
+    }
 };
+
+// Add this middleware to check and clear expired sessions
+app.use(async (req, res, next) => {
+    if (req.session.user) {
+        try {
+            const activeSession = await ActiveSession.findOne({ 
+                userId: req.session.user.id 
+            });
+            
+            if (!activeSession || activeSession.sessionId !== req.sessionID) {
+                req.session.destroy();
+                return res.redirect('/login?error=session_expired');
+            }
+        } catch (error) {
+            console.error('Session check error:', error);
+            req.session.destroy();
+            return res.redirect('/login');
+        }
+    }
+    next();
+});
 
 main().then((res) => {
     console.log("connected to database");
@@ -103,7 +149,7 @@ app.get("/practice", (req, res) => {
 });
 
 
-app.get('/result/:uname', async (req, res) => {
+app.get('/result/:uname', requireAuth, async (req, res) => {
   const { uname } = req.params;
 
   try {
@@ -178,40 +224,66 @@ app.post("/checkuser", async (req, res) => {
     try {
         const user = await User.findOne({ uname, roll });
         if (!user) {
-            console.log('User not found:', uname); // Debug log
             return res.render("login.ejs", { 
                 error: "Invalid username or roll number!", 
                 success: null 
             });
         }
 
-        // Set complete user session data
-        req.session.user = {
-            id: user._id,
-            uname: user.uname,
-            fname: user.fname,
-            lname: user.lname,
-            roll: user.roll,
-            name: `${user.fname} ${user.lname}`
-        };
-        
-        console.log('Session set:', req.session.user); // Debug log
-
-        // Save session before redirect
-        req.session.save((err) => {
-            if (err) {
-                console.error('Session save error:', err);
-                return res.render("login.ejs", { 
-                    error: "An error occurred. Please try again.", 
-                    success: null 
+        try {
+            // Find and remove any existing sessions for this user
+            const existingSession = await ActiveSession.findOne({ userId: user._id });
+            if (existingSession) {
+                // Remove the active session record first
+                await ActiveSession.deleteOne({ userId: user._id });
+                
+                // Then destroy the old session in the store
+                await new Promise((resolve) => {
+                    req.sessionStore.destroy(existingSession.sessionId, (err) => {
+                        if (err) console.error('Error destroying old session:', err);
+                        resolve();
+                    });
                 });
             }
-            console.log('Session saved successfully'); // Debug log
-            res.redirect('/dashboard');
-        });
+
+            // Set up new session data
+            req.session.user = {
+                id: user._id,
+                uname: user.uname,
+                fname: user.fname,
+                lname: user.lname,
+                roll: user.roll,
+                name: `${user.fname} ${user.lname}`
+            };
+
+            // Create new active session record
+            await ActiveSession.create({
+                userId: user._id,
+                sessionId: req.sessionID
+            });
+
+            // Save the session
+            await new Promise((resolve, reject) => {
+                req.session.save((err) => {
+                    if (err) {
+                        console.error('Error saving session:', err);
+                        reject(err);
+                    }
+                    resolve();
+                });
+            });
+
+            return res.redirect('/dashboard');
+        } catch (error) {
+            console.error('Session management error:', error);
+            return res.render("login.ejs", {
+                error: "An error occurred during login. Please try again.",
+                success: null
+            });
+        }
     } catch (error) {
         console.error("Login error:", error);
-        res.render("login.ejs", { 
+        return res.render("login.ejs", { 
             error: "An error occurred. Please try again.", 
             success: null 
         });
@@ -340,17 +412,32 @@ app.post("/register/:secretKey", async (req, res) => {
     }
 });
 
-// Add logout route
-app.get('/logout', (req, res) => {
-    req.session.destroy((err) => {
-        if (err) {
-            console.error('Error destroying session:', err);
+// Update logout route to properly clean up
+app.get('/logout', async (req, res) => {
+    try {
+        if (req.session.user) {
+            // Remove active session record
+            await ActiveSession.deleteOne({ userId: req.session.user.id });
+            
+            // Destroy the session
+            await new Promise((resolve, reject) => {
+                req.session.destroy((err) => {
+                    if (err) {
+                        console.error('Error destroying session:', err);
+                        reject(err);
+                    }
+                    resolve();
+                });
+            });
         }
         res.redirect('/login');
-    });
+    } catch (error) {
+        console.error('Logout error:', error);
+        res.redirect('/login');
+    }
 });
 
-// Update dashboard route with logging
+// Make sure to protect all your routes that require authentication
 app.get('/dashboard', requireAuth, async (req, res) => {
     try {
         const existingSubmission = await StudentResponse.findOne({ uname: req.session.user.uname });

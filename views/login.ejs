@@ -30,6 +30,13 @@
                 </div>
             <% } %>
 
+            <% if (success) { %>
+                <div class="success-message">
+                    <i class='bx bx-check-circle'></i>
+                    <%= success %>
+                </div>
+            <% } %>
+
             <button type="submit" class="auth-button">
                 <span>Sign In</span>
                 <i class='bx bx-right-arrow-alt'></i>
